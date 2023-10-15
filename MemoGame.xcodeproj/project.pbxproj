@@ -14,6 +14,7 @@
 		A31CC1612ADBF6460077D635 /* MemoGameTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A31CC1602ADBF6460077D635 /* MemoGameTests.swift */; };
 		A31CC16B2ADBF6460077D635 /* MemoGameUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A31CC16A2ADBF6460077D635 /* MemoGameUITests.swift */; };
 		A31CC16D2ADBF6460077D635 /* MemoGameUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A31CC16C2ADBF6460077D635 /* MemoGameUITestsLaunchTests.swift */; };
+		A31CC17A2ADBF7910077D635 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A31CC1792ADBF7910077D635 /* CardView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +45,7 @@
 		A31CC1662ADBF6460077D635 /* MemoGameUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MemoGameUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A31CC16A2ADBF6460077D635 /* MemoGameUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoGameUITests.swift; sourceTree = "<group>"; };
 		A31CC16C2ADBF6460077D635 /* MemoGameUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoGameUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		A31CC1792ADBF7910077D635 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +98,7 @@
 			children = (
 				A31CC14F2ADBF6440077D635 /* MemoGameApp.swift */,
 				A31CC1512ADBF6440077D635 /* ContentView.swift */,
+				A31CC1792ADBF7910077D635 /* CardView.swift */,
 				A31CC1532ADBF6460077D635 /* Assets.xcassets */,
 				A31CC1552ADBF6460077D635 /* Preview Content */,
 			);
@@ -258,6 +261,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A31CC1522ADBF6440077D635 /* ContentView.swift in Sources */,
+				A31CC17A2ADBF7910077D635 /* CardView.swift in Sources */,
 				A31CC1502ADBF6440077D635 /* MemoGameApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
