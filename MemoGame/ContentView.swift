@@ -49,9 +49,11 @@ struct ContentView: View {
     
     func cardDisplay() -> some View {
         return (
-            LazyVGrid(columns: [GridItem(.adaptive(minimum: 120))]) {
-                ForEach(0..<cardsCount, id: \.self) { index in
-                    CardView(content: emojis[index])
+            ScrollView {
+                LazyVGrid(columns: [GridItem(.adaptive(minimum: 120))]) {
+                    ForEach(0..<cardsCount, id: \.self) { index in
+                        CardView(content: emojis[index])
+                    }
                 }
             }
         )
