@@ -9,16 +9,19 @@ import SwiftUI
 
 struct CardView: View {
     let content: String
-    @State var isEmojiShow:Bool = true
+    let colors = [Color.blue, Color.red, Color.green]
+    @State var isEmojiShow:Bool = false
+    @Binding var showTheme: Int
+    
     
     var body: some View {
         let base = RoundedRectangle(cornerRadius: 12)
         
         ZStack {
-            base.fill(.blue)
+            base.fill(colors[showTheme - 1])
             Group {
                 base.fill(.white)
-                base.stroke(.blue, lineWidth:2)
+                base.stroke(colors[showTheme - 1], lineWidth:2)
                 Text(content).font(.largeTitle)
             }
             .opacity(isEmojiShow ? 1 : 0)
@@ -27,10 +30,12 @@ struct CardView: View {
             isEmojiShow.toggle()
         }
     }
+    
 }
 
 struct CardView_Previews: PreviewProvider {
+    @State static var showTheme = 1	
     static var previews: some View {
-        CardView(content: "😁", isEmojiShow: true)
+        CardView(content: "😁", isEmojiShow: true, showTheme: $showTheme)
     }
 }

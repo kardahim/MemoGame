@@ -14,20 +14,34 @@ struct ContentView: View {
                   "👺", "😁", "🐶", "🐴", "🦄", "⚽️",
                   "👺", "😁", "🐶", "🐴", "🦄", "⚽️",
                   "👺", "😁", "🐶", "🐴", "🦄", "⚽️"]
+    @State var emojisTheme1 = ["😀", "😡", "🥸", "😇",
+                               "😀", "😡", "🥸", "😇"].shuffled()
+    @State var emojisTheme2 = ["🐶", "🦁", "🐰", "🐷", "🐒", "🪲", "🐍", "🦕",
+                        "🐶", "🦁", "🐰", "🐷", "🐒", "🪲", "🐍", "🦕"].shuffled()
+    @State var emojisTheme3 = ["⚽️", "🏀", "🥎", "🎱",
+                        "⚽️", "🏀", "🥎", "🎱"].shuffled()
+    
     @State var cardsCount = 2
+    @State var showTheme = 1
     
     var body: some View {
-        let addButton = adjustCardNumber(by: 2, symbol: "+")
-        let subButton = adjustCardNumber(by: -2, symbol: "-")
+        // let addButton = adjustCardNumber(by: 2, symbol: "+")
+        // let subButton = adjustCardNumber(by: -2, symbol: "-")
         let cards = cardDisplay()
         
         VStack {
+            Text("Memo").font(.largeTitle)
             cards
             Spacer()
             HStack {
-                subButton
-                Spacer()
-                addButton
+                // subButton
+                // Spacer()
+                // addButton
+                ThemeButtonView(showTheme: $showTheme, content: $emojisTheme1, buttonText: "1")
+                    Spacer()
+                    ThemeButtonView(showTheme: $showTheme, content: $emojisTheme2, buttonText: "2")
+                    Spacer()
+                    ThemeButtonView(showTheme: $showTheme, content: $emojisTheme3, buttonText: "3")
             }
         }.padding()
     }
@@ -50,9 +64,22 @@ struct ContentView: View {
     func cardDisplay() -> some View {
         return (
             ScrollView {
-                LazyVGrid(columns: [GridItem(.adaptive(minimum: 120))]) {
-                    ForEach(0..<cardsCount, id: \.self) { index in
-                        CardView(content: emojis[index])
+                LazyVGrid(columns: [GridItem(.adaptive(minimum: 80))]) {
+//                    ForEach(0..<cardsCount, id: \.self) { index in
+//                        CardView(content: emojis[index], showTheme: $showTheme).aspectRatio(2/3, contentMode: .fit)
+//                    }
+                    if showTheme == 1 {
+                        ForEach(0..<emojisTheme1.count, id: \.self) { index in
+                            CardView(content: emojisTheme1[index], showTheme: $showTheme).aspectRatio(2/3, contentMode: .fit)
+                        }
+                    } else if showTheme == 2 {
+                        ForEach(0..<emojisTheme2.count, id: \.self) { index in
+                            CardView(content: emojisTheme2[index], showTheme: $showTheme).aspectRatio(2/3, contentMode: .fit)
+                        }
+                    } else {
+                        ForEach(0..<emojisTheme3.count, id: \.self) { index in
+                            CardView(content: emojisTheme3[index], showTheme: $showTheme).aspectRatio(2/3, contentMode: .fit)
+                        }
                     }
                 }
             }
