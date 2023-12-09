@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A304ABED2B1E479F00B9ACBF /* TransformIntoCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = A304ABEC2B1E479F00B9ACBF /* TransformIntoCard.swift */; };
 		A31CC1502ADBF6440077D635 /* MemoGameApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A31CC14F2ADBF6440077D635 /* MemoGameApp.swift */; };
 		A31CC1522ADBF6440077D635 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A31CC1512ADBF6440077D635 /* ContentView.swift */; };
 		A31CC1542ADBF6460077D635 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A31CC1532ADBF6460077D635 /* Assets.xcassets */; };
@@ -15,7 +16,11 @@
 		A31CC16B2ADBF6460077D635 /* MemoGameUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A31CC16A2ADBF6460077D635 /* MemoGameUITests.swift */; };
 		A31CC16D2ADBF6460077D635 /* MemoGameUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A31CC16C2ADBF6460077D635 /* MemoGameUITestsLaunchTests.swift */; };
 		A31CC17A2ADBF7910077D635 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A31CC1792ADBF7910077D635 /* CardView.swift */; };
+		A32B6EFD2B2491FF005BBDF0 /* FlyingNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = A32B6EFC2B2491FE005BBDF0 /* FlyingNumber.swift */; };
+		A33739EF2AFA199100DDC404 /* MemoGameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A33739EE2AFA199100DDC404 /* MemoGameModel.swift */; };
 		A3DD47392ADE5C0D00BF33FA /* ThemeButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3DD47382ADE5C0D00BF33FA /* ThemeButtonView.swift */; };
+		A3F0535E2B15CBA100CE9E19 /* CirclePart.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3F0535D2B15CBA100CE9E19 /* CirclePart.swift */; };
+		A3F2F7572AFA1EA2007641F0 /* MemoGameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3F2F7562AFA1EA2007641F0 /* MemoGameViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +41,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A304ABEC2B1E479F00B9ACBF /* TransformIntoCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransformIntoCard.swift; sourceTree = "<group>"; };
 		A31CC14C2ADBF6440077D635 /* MemoGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MemoGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A31CC14F2ADBF6440077D635 /* MemoGameApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoGameApp.swift; sourceTree = "<group>"; };
 		A31CC1512ADBF6440077D635 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -47,7 +53,11 @@
 		A31CC16A2ADBF6460077D635 /* MemoGameUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoGameUITests.swift; sourceTree = "<group>"; };
 		A31CC16C2ADBF6460077D635 /* MemoGameUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoGameUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		A31CC1792ADBF7910077D635 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
+		A32B6EFC2B2491FE005BBDF0 /* FlyingNumber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlyingNumber.swift; sourceTree = "<group>"; };
+		A33739EE2AFA199100DDC404 /* MemoGameModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoGameModel.swift; sourceTree = "<group>"; };
 		A3DD47382ADE5C0D00BF33FA /* ThemeButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeButtonView.swift; sourceTree = "<group>"; };
+		A3F0535D2B15CBA100CE9E19 /* CirclePart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CirclePart.swift; sourceTree = "<group>"; };
+		A3F2F7562AFA1EA2007641F0 /* MemoGameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoGameViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,7 +89,6 @@
 			isa = PBXGroup;
 			children = (
 				A31CC14E2ADBF6440077D635 /* MemoGame */,
-				A31CC15F2ADBF6460077D635 /* MemoGameTests */,
 				A31CC1692ADBF6460077D635 /* MemoGameUITests */,
 				A31CC14D2ADBF6440077D635 /* Products */,
 			);
@@ -100,8 +109,14 @@
 			children = (
 				A31CC14F2ADBF6440077D635 /* MemoGameApp.swift */,
 				A31CC1512ADBF6440077D635 /* ContentView.swift */,
+				A33739EE2AFA199100DDC404 /* MemoGameModel.swift */,
+				A304ABEC2B1E479F00B9ACBF /* TransformIntoCard.swift */,
+				A32B6EFC2B2491FE005BBDF0 /* FlyingNumber.swift */,
+				A3F2F7562AFA1EA2007641F0 /* MemoGameViewModel.swift */,
 				A3DD47382ADE5C0D00BF33FA /* ThemeButtonView.swift */,
 				A31CC1792ADBF7910077D635 /* CardView.swift */,
+				A3F0535D2B15CBA100CE9E19 /* CirclePart.swift */,
+				A31CC15F2ADBF6460077D635 /* MemoGameTests */,
 				A31CC1532ADBF6460077D635 /* Assets.xcassets */,
 				A31CC1552ADBF6460077D635 /* Preview Content */,
 			);
@@ -263,7 +278,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A33739EF2AFA199100DDC404 /* MemoGameModel.swift in Sources */,
 				A31CC1522ADBF6440077D635 /* ContentView.swift in Sources */,
+				A32B6EFD2B2491FF005BBDF0 /* FlyingNumber.swift in Sources */,
+				A304ABED2B1E479F00B9ACBF /* TransformIntoCard.swift in Sources */,
+				A3F0535E2B15CBA100CE9E19 /* CirclePart.swift in Sources */,
+				A3F2F7572AFA1EA2007641F0 /* MemoGameViewModel.swift in Sources */,
 				A31CC17A2ADBF7910077D635 /* CardView.swift in Sources */,
 				A3DD47392ADE5C0D00BF33FA /* ThemeButtonView.swift in Sources */,
 				A31CC1502ADBF6440077D635 /* MemoGameApp.swift in Sources */,

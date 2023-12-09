@@ -8,82 +8,68 @@
 import SwiftUI
 
 struct ContentView: View {
-    // emojis array
-    let emojis = ["👺", "😁", "🐶", "🐴", "🦄", "⚽️",
-                  "👺", "😁", "🐶", "🐴", "🦄", "⚽️",
-                  "👺", "😁", "🐶", "🐴", "🦄", "⚽️",
-                  "👺", "😁", "🐶", "🐴", "🦄", "⚽️",
-                  "👺", "😁", "🐶", "🐴", "🦄", "⚽️"]
-    @State var emojisTheme1 = ["😀", "😡", "🥸", "😇",
-                               "😀", "😡", "🥸", "😇"].shuffled()
-    @State var emojisTheme2 = ["🐶", "🦁", "🐰", "🐷", "🐒", "🪲", "🐍", "🦕",
-                        "🐶", "🦁", "🐰", "🐷", "🐒", "🪲", "🐍", "🦕"].shuffled()
-    @State var emojisTheme3 = ["⚽️", "🏀", "🥎", "🎱",
-                        "⚽️", "🏀", "🥎", "🎱"].shuffled()
-    
-    @State var cardsCount = 2
-    @State var showTheme = 1
+    @ObservedObject var viewModel: MemoGameViewModel = MemoGameViewModel()
+    @State private var lastScoreChange: (points: Int, cardId: String) = (0, "0")
     
     var body: some View {
-        // let addButton = adjustCardNumber(by: 2, symbol: "+")
-        // let subButton = adjustCardNumber(by: -2, symbol: "-")
-        let cards = cardDisplay()
-        
         VStack {
-            Text("Memo").font(.largeTitle)
-            cards
-            Spacer()
-            HStack {
-                // subButton
-                // Spacer()
-                // addButton
-                ThemeButtonView(showTheme: $showTheme, content: $emojisTheme1, buttonText: "1")
-                    Spacer()
-                    ThemeButtonView(showTheme: $showTheme, content: $emojisTheme2, buttonText: "2")
-                    Spacer()
-                    ThemeButtonView(showTheme: $showTheme, content: $emojisTheme3, buttonText: "3")
+            Text("Memo game").font(.title)
+            ScrollView {
+                cards.animation(.default, value: viewModel.cards)
             }
+            HStack {
+                Text("Wynik: \(viewModel.score)").font(.title2)
+                Spacer()
+                Button("SHUFFLE") {
+                    viewModel.shuffle()
+                }
+            }.padding(.bottom, 20)
+            themeButtons
         }.padding()
     }
     
-    
-    func adjustCardNumber(by offset: Int, symbol: String) -> some View {
-        let temp: Int = cardsCount + offset
-        
-        var state: Bool = false
-        if temp < 2 || temp > emojis.count {
-            state.toggle()
-        }
-        
-        return Button(symbol) {cardsCount += offset}
-            .disabled(state)
-            .frame(width: 30, height: 20)
-            .border(.blue)
-    }
-    
-    func cardDisplay() -> some View {
-        return (
-            ScrollView {
-                LazyVGrid(columns: [GridItem(.adaptive(minimum: 80))]) {
-//                    ForEach(0..<cardsCount, id: \.self) { index in
-//                        CardView(content: emojis[index], showTheme: $showTheme).aspectRatio(2/3, contentMode: .fit)
-//                    }
-                    if showTheme == 1 {
-                        ForEach(0..<emojisTheme1.count, id: \.self) { index in
-                            CardView(content: emojisTheme1[index], showTheme: $showTheme).aspectRatio(2/3, contentMode: .fit)
+    var cards: some View {
+        LazyVGrid(columns: [GridItem(.adaptive(minimum: 85), spacing: 0)], spacing: 0) {
+            ForEach(viewModel.cards) { card in
+                ZStack {
+                    CardView(card)
+                        .aspectRatio(2/3, contentMode: .fit)
+                        .padding(4)
+                        .onTapGesture {
+                            let prevScore = viewModel.score
+                            viewModel.choose(card)
+                            let scoreChange = viewModel.score - prevScore
+                            lastScoreChange = (scoreChange, card.id)
                         }
-                    } else if showTheme == 2 {
-                        ForEach(0..<emojisTheme2.count, id: \.self) { index in
-                            CardView(content: emojisTheme2[index], showTheme: $showTheme).aspectRatio(2/3, contentMode: .fit)
-                        }
-                    } else {
-                        ForEach(0..<emojisTheme3.count, id: \.self) { index in
-                            CardView(content: emojisTheme3[index], showTheme: $showTheme).aspectRatio(2/3, contentMode: .fit)
-                        }
+                        .transformIntoCard(isFaceUp: card.isFaceUp)
+                    
+                    if card.id == lastScoreChange.cardId && lastScoreChange.points != 0 {
+                        FlyingNumber(number: lastScoreChange.points)
+                            .onAppear {
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                                    lastScoreChange = (0, "0")
+                                }
+                            }
                     }
                 }
             }
-        )
+        }.foregroundColor(viewModel.themeColor)
+    }
+    
+    func scoreChange(for cardId: String) -> Int {
+        return cardId == lastScoreChange.cardId ? lastScoreChange.points : 0
+    }
+    
+    var themeButtons: some View {
+        HStack {
+            Spacer()
+            ThemeButtonView(viewModel: viewModel, imageName: "pencil", content: "Motyw 1", ownColor: .blue)
+            Spacer()
+            ThemeButtonView(viewModel: viewModel, imageName: "pencil", content: "Motyw 2", ownColor: .red)
+            Spacer()
+            ThemeButtonView(viewModel: viewModel, imageName: "pencil", content: "Motyw 3", ownColor: .green)
+            Spacer()
+        }
     }
 }
 

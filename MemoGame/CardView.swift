@@ -8,34 +8,38 @@
 import SwiftUI
 
 struct CardView: View {
-    let content: String
-    let colors = [Color.blue, Color.red, Color.green]
-    @State var isEmojiShow:Bool = false
-    @Binding var showTheme: Int
+    var card: MemoGameModel<String>.Card
     
+    init(_ card: MemoGameModel<String>.Card) {
+        self.card = card
+    }
+
     
     var body: some View {
         let base = RoundedRectangle(cornerRadius: 12)
-        
-        ZStack {
-            base.fill(colors[showTheme - 1])
-            Group {
-                base.fill(.white)
-                base.stroke(colors[showTheme - 1], lineWidth:2)
-                Text(content).font(.largeTitle)
-            }
-            .opacity(isEmojiShow ? 1 : 0)
-        }
-        .onTapGesture {
-            isEmojiShow.toggle()
-        }
+        base
+            .overlay(
+                Group {
+//                    if card.isFaceUp {
+                        base.fill(.white)
+                        base.strokeBorder(lineWidth: 3)
+                        CirclePart()
+                        Text(card.content)
+                            .font(.system(size: 200))
+                            .minimumScaleFactor(0.01)
+                            .aspectRatio(1, contentMode: .fit)
+                            .rotationEffect(.degrees(card.isMatched ? 360 : 0))
+                            .animation(Animation.spin(duration: 2))
+//                    }
+                }.opacity(card.isFaceUp ? 1 : 0)
+            )
+            .aspectRatio(2/3, contentMode: .fill)
+            .opacity(card.isFaceUp || !card.isMatched ? 1: 0)
     }
-    
 }
 
-struct CardView_Previews: PreviewProvider {
-    @State static var showTheme = 1	
-    static var previews: some View {
-        CardView(content: "😁", isEmojiShow: true, showTheme: $showTheme)
+extension Animation {
+    static func spin(duration: Double) -> Animation {
+        return Animation.linear(duration: duration).repeatForever(autoreverses: false)
     }
 }

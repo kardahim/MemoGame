@@ -8,57 +8,19 @@
 import SwiftUI
 
 struct ThemeButtonView: View {
-    @Binding var showTheme: Int
-    @Binding var content: Array<String>
-    let colors = [Color.blue, Color.red, Color.green]
-    let buttonText: String
+    @ObservedObject var viewModel: MemoGameViewModel
+    var imageName: String
+    var content: String
+    var ownColor = Color.blue
     
     var body: some View {
-        Group {
-            if buttonText == "1" {
-                Button {
-                    showTheme = 1
-                    shuffleContent()
-                } label: {
-                    VStack {
-                        Image(systemName: "smiley").font(.title)
-                        Text("Motyw 1")
-                    }
-                }
-            } else if buttonText == "2" {
-                Button {
-                    showTheme = 2
-                    shuffleContent()
-                } label: {
-                    VStack {
-                        Image(systemName: "shuffle.circle").font(.title)
-                        Text("Motyw 2")
-                    }
-                }
-            } else {
-                Button {
-                    showTheme = 3
-                    shuffleContent()
-                } label: {
-                    VStack {
-                        Image(systemName: "paperplane.circle").font(.title)
-                        Text("Motyw 3")
-                    }
-                }
+        Button(action: {
+            viewModel.changeTheme(color: ownColor)
+        }, label: {
+            VStack {
+                Image(systemName: imageName).font(.title)
+                Text(content)
             }
-        }.foregroundColor(colors[showTheme - 1])
-    }
-    
-    func shuffleContent() {
-        content = content.shuffled()
-    }
-}
-
-struct ThemeButtonView_Previews: PreviewProvider {
-    @State static var showTheme = 1
-    @State static var emojisTheme1 = ["😀", "😡", "🥸", "😇",
-                        "😀", "😡", "🥸", "😇"]
-    static var previews: some View {
-        ThemeButtonView(showTheme: $showTheme, content: $emojisTheme1, buttonText: "1")
+        }).foregroundColor(ownColor)
     }
 }
